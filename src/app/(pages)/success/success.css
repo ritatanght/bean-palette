@@ -1,0 +1,48 @@
+.transaction-success-wrapper {
+  margin: 2em auto;
+  display: grid;
+  max-width: 350px;
+  row-gap: 0.5em;
+  padding: 1em;
+  box-shadow: 0px 0px 5px 5px var(--clr-brown-100);
+}
+
+.success__heading {
+  font-family: "Damion", cursive;
+  font-weight: normal;
+  font-size: 4.5rem;
+  color: var(--clr-brown-300);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+.success__subheading {
+  text-transform: uppercase;
+  color: var(--clr-brown-300);
+}
+
+.success__divider {
+  width: 100%;
+  border-style: none;
+  border-top: 5px dashed var(--clr-brown-100);
+  margin: 1em auto;
+}
+
+.transaction-success-wrapper > p {
+  line-height: 1.6;
+}
+.transaction-success-wrapper > .btn {
+  margin: 0;
+}
+
+.customer-name,
+.customer-email {
+  color: var(--clr-brown-400);
+}
+
+@media (min-width: 500px) {
+  .success__heading {
+    font-size: 5rem;
+  }
+  .transaction-success-wrapper {
+    max-width: 600px;
+  }
+}

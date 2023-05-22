@@ -1,0 +1,32 @@
+.contact__text {
+  margin-block: 0.5em;
+  line-height: 1.6;
+}
+
+.contact__form {
+  padding-block: 1em;
+  grid-column: 2 / span 1;
+}
+.contact__form > input,
+.contact__form > textarea {
+  padding: 0.5em;
+  margin-block: 0.5em;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 8lh;
+}
+
+@media (min-width: 600px) {
+  .contact-page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5em;
+  }
+  .contact__form {
+    padding-block: 0;
+  }
+}

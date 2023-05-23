@@ -17,7 +17,7 @@ const MiniCartDetails: React.FC<MiniCartProps> = ({
   setIsCartOpen,
 }) => {
   const { cartItems, totalQuantity, totalAmount } = useCartContext();
-  
+
   const handleSubmit = async () => {
     const stripe = await getStripe();
     const checkoutItems = cartItems.map(
@@ -84,11 +84,17 @@ const MiniCartDetails: React.FC<MiniCartProps> = ({
             </p>
             <p>
               <span>Shipping</span>
-              <span>Calculated at checkout</span>
+              <span>
+                {totalAmount >= 50 ? "FREE" : "Calculated at checkout"}
+              </span>
             </p>
             <p className="summary__total">
               <span>Total</span>
-              <span>To be determined</span>
+              <span>
+                {totalAmount >= 50
+                  ? `$${totalAmount.toFixed(2)}`
+                  : "To be determined"}
+              </span>
             </p>
 
             <button className="btn" onClick={handleSubmit}>

@@ -5,11 +5,11 @@ import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { useCartContext } from "../context/cartContext";
 
 const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
-  const { name, sizePrice } = product;
-  const [size, setSize] = useState(sizePrice[0].size);
+  const { name, sizePrice, isInStock } = product;
+  const [size, setSize] = useState(isInStock ? sizePrice[0].size : "");
   const [price, setPrice] = useState(sizePrice[0].price);
-  const [grind, setGrind] = useState("Whole Bean");
-  const [quantity, setQuantity] = useState(1);
+  const [grind, setGrind] = useState(isInStock ? "Whole Bean" : "");
+  const [quantity, setQuantity] = useState(isInStock ? 1 : 0);
   const { addToCart } = useCartContext() as CartContextType;
 
   const grindOptions = [
@@ -30,9 +30,9 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
   };
 
   const handleQuantityChange = (type: string) => {
-    if (type === "add") {
+    if (type === "add" && isInStock) {
       setQuantity((prevQuantity) => prevQuantity + 1);
-    } else if (type === "minus") {
+    } else if (type === "minus" && isInStock) {
       setQuantity((prevQuantity) => {
         if (prevQuantity - 1 < 1) return 1;
         return prevQuantity - 1;
@@ -58,7 +58,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
                 key={item._key}
                 className={`product-size ${
                   size === item.size ? "selected" : ""
-                }`}
+                }${isInStock ? "" : "disabled"}`}
               >
                 <input
                   type="radio"
@@ -66,6 +66,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
                   name="size"
                   checked={size === item.size}
                   onChange={handleChange}
+                  disabled={!isInStock}
                 />
                 {item.size}
               </label>
@@ -78,7 +79,9 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
           {grindOptions.map((option) => (
             <label
               key={option}
-              className={`product-grind ${grind === option ? "selected" : ""}`}
+              className={`product-grind ${grind === option ? "selected" : ""}${
+                isInStock ? "" : "disabled"
+              }`}
             >
               <input
                 type="radio"
@@ -86,6 +89,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
                 value={option}
                 checked={grind === option}
                 onChange={(e) => setGrind(e.target.value)}
+                disabled={!isInStock}
               />
               {option}
             </label>
@@ -98,29 +102,36 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
           <button
             className="minus-qty icon-btn"
             aria-label="Decrease quantity"
+            disabled={!isInStock}
             onClick={() => handleQuantityChange("minus")}
           >
             <HiMinusSm />
           </button>
           <input
             type="number"
-            min="1"
+            min={isInStock ? 1 : 0}
             name="quantity"
             value={quantity}
             className="quantity-num text-center"
+            disabled={!isInStock}
             onChange={(e) => setQuantity(Number(e.target.value))}
           />
           <button
             className="add-qty icon-btn"
             aria-label="Increase quantity"
+            disabled={!isInStock}
             onClick={() => handleQuantityChange("add")}
           >
             <HiPlusSm />
           </button>
         </div>
       </section>
-      <button className="btn to-cart-btn" onClick={handleAddCart}>
-        Add to Cart
+      <button
+        className="btn to-cart-btn disabled-btn"
+        onClick={handleAddCart}
+        disabled={!isInStock}
+      >
+        {isInStock ? "Add to Cart" : "Sold Out"}
       </button>
     </div>
   );

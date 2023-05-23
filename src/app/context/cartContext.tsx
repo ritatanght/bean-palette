@@ -16,6 +16,7 @@ export const CartContextProvider = ({
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart-items");
+
     if (storedCart) {
       setCartItems(JSON.parse(storedCart));
     }
@@ -51,13 +52,6 @@ export const CartContextProvider = ({
         )
       );
     }
-    // setTotalAmount(
-    //   (prevTotalAmount) => prevTotalAmount + newItem.price * newItem.quantity
-    // );
-    // setTotalQuantity(
-    //   (prevTotalQuantity) => prevTotalQuantity + newItem.quantity
-    // );
-
     toast.success("Added to Cart");
   };
 
@@ -124,7 +118,7 @@ export const CartContextProvider = ({
         addToCart,
         toggleQuantity,
         removeFromCart,
-        setCartItems
+        setCartItems,
       }}
     >
       {children}

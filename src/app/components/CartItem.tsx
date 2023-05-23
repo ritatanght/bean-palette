@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { urlForImage } from "../../../sanity/lib/image";
 import { CartItemDetail } from "../types/types";
 import { RiDeleteBin2Line } from "react-icons/ri";
@@ -10,7 +11,7 @@ const CartItem: React.FC<{ item: CartItemDetail }> = ({ item }) => {
   const [quantity, setQuantity] = useState<number>(item.quantity);
   const { toggleQuantity, removeFromCart } = useCartContext();
   const {
-    product: { _id: id, name, image },
+    product: { _id: id, slug:{current:slug}, name, image },
     size,
     grind,
     price,
@@ -44,15 +45,17 @@ const CartItem: React.FC<{ item: CartItemDetail }> = ({ item }) => {
         />
       </div>
       <div className="mini-cart__item-text">
-        <h3 className="mini-cart__item-name">
-          {name.length > 25 ? name.slice(0, 25) + "..." : name}
-        </h3>
-        <p>
-          <strong>Size:</strong> {size}
-        </p>
-        <p>
-          <strong>Grind:</strong> {grind}
-        </p>
+        <Link href={`/product/${slug}`}>
+          <h3 className="mini-cart__item-name">
+            {name.length > 25 ? name.slice(0, 25) + "..." : name}
+          </h3>
+          <p>
+            <strong>Size:</strong> {size}
+          </p>
+          <p>
+            <strong>Grind:</strong> {grind}
+          </p>
+        </Link>
       </div>
 
       <div className="qty-selector-container mini-cart__qty-selector">

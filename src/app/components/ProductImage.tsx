@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ImageAsset } from "sanity";
 import { urlForImage } from "../../../sanity/lib/image";
 import {
+  IoMdClose,
   IoMdArrowDropleftCircle,
   IoMdArrowDroprightCircle,
 } from "react-icons/io";
@@ -15,6 +16,7 @@ interface Props {
 
 const ProductImage: React.FC<Props> = ({ name, images }) => {
   const [index, setIndex] = useState(0);
+  const [showLgImage, setLgImage] = useState(false);
 
   const handleArrowClick = (action: string) => {
     if (action === "prev") {
@@ -28,8 +30,36 @@ const ProductImage: React.FC<Props> = ({ name, images }) => {
     }
   };
 
+  const toggleImage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="product-image-container">
+      <div
+        className={`overlay enlarge-image-container ${
+          showLgImage ? "show-overlay" : ""
+        }`}
+        onClick={() => setLgImage(false)}
+      >
+        <div className="enlarge-image">
+          <button
+            className="icon-btn enlarge-image-close"
+            onClick={() => setLgImage(false)}
+          >
+            <IoMdClose />
+          </button>
+          <Image
+            src={urlForImage(images && images[index]).url()}
+            alt={name}
+            fill={true}
+            sizes="(max-width: 650px) 90vw, (max-width: 1200px) 60vw, 50vw"
+            priority
+            onClick={(e) => toggleImage(e)}
+          />
+        </div>
+      </div>
+
       <div className="product-large">
         <button
           className="icon-btn prev-btn"
@@ -44,6 +74,7 @@ const ProductImage: React.FC<Props> = ({ name, images }) => {
           fill={true}
           sizes="(max-width: 650px) 90vw, (max-width: 1200px) 45vw, 30vw"
           priority
+          onClick={() => setLgImage(true)}
         />
         <button
           className="icon-btn next-btn"

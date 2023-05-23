@@ -324,6 +324,7 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
+  position: relative;
 }
 .banner__heading {
   grid-column: 1 /-2;
@@ -395,8 +396,19 @@ nav {
 
 .banner__shipping .banner__heading {
   width: 70%;
-  text-shadow: 2px 2px 5px var(--clr-white);
+  text-shadow: 2px -2px 5px var(--clr-white);
   line-height: 1.6;
+}
+
+.banner__selector {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+}
+.banner__selector > button {
+  color: var(--clr-brown-400);
+  margin-left: -10px;
 }
 
 @media (max-width: 850px) {
@@ -473,6 +485,18 @@ nav {
 .product-card:hover::before {
   opacity: 1;
 }
+
+.sold-out::after {
+  content: "SOLD OUT";
+  position: absolute;
+  background: var(--clr-dark);
+  color: var(--clr-brown-100);
+  top: 0;
+  right: 0;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
 .product-card > a {
   height: 100%;
   display: flex;

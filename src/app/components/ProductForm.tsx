@@ -9,6 +9,7 @@ import {
   BsFillShareFill,
 } from "react-icons/bs";
 import { useCartContext } from "../context/cartContext";
+import { usePathname } from "next/navigation";
 
 const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
   const { name, sizePrice, isInStock } = product;
@@ -17,7 +18,9 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
   const [grind, setGrind] = useState(isInStock ? "Whole Bean" : "");
   const [quantity, setQuantity] = useState(isInStock ? 1 : 0);
   const { addToCart } = useCartContext() as CartContextType;
-  const path = typeof location === "undefined" ? "" : location.href;
+  const pathname = usePathname();
+  const path =
+    typeof location === "undefined" ? "" : location.origin + pathname;
 
   const grindOptions = [
     "Whole Bean",

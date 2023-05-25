@@ -7,7 +7,7 @@ const FAQs = () => {
   return (
     <main className="container page-container">
       <h2 className="">FAQs</h2>
-      <section>
+      <section key="order_q">
         <h3>
           Orders and Payments
           <MdOutlineShoppingBag
@@ -22,7 +22,7 @@ const FAQs = () => {
           </>
         ))}
       </section>
-      <section>
+      <section key="shipping_q">
         <h3>
           Shipping and Delivery
           <MdOutlineLocalShipping

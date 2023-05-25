@@ -8,7 +8,7 @@ import { PortableText, PortableTextComponents } from "@portabletext/react";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const product: ProductData = await getProduct(params.slug);
-
+  
   return (
     <main className="product-page-container container page-container">
       <ProductImage name={product.name} images={product.image} />

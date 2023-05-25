@@ -1,17 +1,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { urlForImage } from "../../../sanity/lib/image";
-import { CartItemDetail } from "../types/types";
+import { urlForImage } from "../../../../../sanity/lib/image";
+import { CartItemDetail } from "../../../types/types";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
-import { useCartContext } from "../context/cartContext";
+import { useCartContext } from "../../../context/cartContext";
 
 const CartItem: React.FC<{ item: CartItemDetail }> = ({ item }) => {
   const [quantity, setQuantity] = useState<number>(item.quantity);
   const { toggleQuantity, removeFromCart } = useCartContext();
   const {
-    product: { _id: id, slug:{current:slug}, name, image },
+    product: {
+      _id: id,
+      slug: { current: slug },
+      name,
+      image,
+    },
     size,
     grind,
     price,

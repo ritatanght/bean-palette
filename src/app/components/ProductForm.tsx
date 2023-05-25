@@ -1,7 +1,13 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { CartContextType, CartItemDetail, ProductData } from "../types/types";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
+import {
+  BsFacebook,
+  BsTwitter,
+  BsLink45Deg,
+  BsFillShareFill,
+} from "react-icons/bs";
 import { useCartContext } from "../context/cartContext";
 
 const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
@@ -11,6 +17,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
   const [grind, setGrind] = useState(isInStock ? "Whole Bean" : "");
   const [quantity, setQuantity] = useState(isInStock ? 1 : 0);
   const { addToCart } = useCartContext() as CartContextType;
+  const path = typeof location === "undefined" ? "" : location.href;
 
   const grindOptions = [
     "Whole Bean",
@@ -19,7 +26,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
     "For Filter drip",
   ];
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSize(e.target.value);
     const sizePricePair = sizePrice.find(
       (item) => item.size === e.target.value
@@ -96,6 +103,46 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
           ))}
         </div>
       </section>
+      <div className="product-share__container">
+        <button className="icon-btn share-icon">
+          <BsFillShareFill />
+        </button>
+        <ul aria-label="Social media share icons" className="social-share-list">
+          <li>
+            <a
+              aria-label="Facebook"
+              href={`https://www.facebook.com/sharer.php?u=${path}`}
+              target="_blank"
+              className="icon-btn"
+              style={{ color: "#1877F2" }}
+            >
+              <BsFacebook />
+            </a>
+          </li>
+          <li>
+            <a
+              aria-label="Twitter"
+              href={`https://twitter.com/intent/tweet?url=${path}&text=${encodeURIComponent(
+                "Take a look at this!"
+              )}`}
+              target="_blank"
+              className="icon-btn"
+              style={{ color: "#08A0E9" }}
+            >
+              <BsTwitter />
+            </a>
+          </li>
+          <li>
+            <button
+              aria-label="Copy URL"
+              className="icon-btn copy-link-btn"
+              onClick={() => navigator.clipboard.writeText(path)}
+            >
+              <BsLink45Deg />
+            </button>
+          </li>
+        </ul>
+      </div>
       <section>
         <strong>Quantity:</strong>
         <div className="qty-selector-container">

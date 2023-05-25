@@ -16,7 +16,11 @@ const FAQItem: React.FC<{ item: FAQ }> = ({ item }) => {
         onClick={() => setExpanded(!expanded)}
       >
         {item.question}
-        <button className="icon-btn" aria-label="Toggle expand answer">
+        <button
+          className="icon-btn"
+          aria-label="Toggle expand answer"
+          aria-expanded={expanded}
+        >
           {expanded ? <MdExpandLess /> : <MdExpandMore />}
         </button>
       </h4>

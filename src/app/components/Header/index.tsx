@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { useCartContext } from "../context/cartContext";
+import { useCartContext } from "../../context/cartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { GrMenu, GrCart } from "react-icons/gr";
-import MiniCartDetails from "./MiniCartDetails";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./Navbar";
+import MiniCart from "./MiniCart";
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +21,7 @@ const Header = () => {
         <button
           aria-label="Open navigation"
           className="mobile-menu icon-btn"
-          aria-expanded="false"
+          aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen(true)}
         >
           <GrMenu />
@@ -54,7 +54,7 @@ const Header = () => {
         className={`overlay ${isCartOpen || isMenuOpen ? "show-overlay" : ""}`}
         onClick={toggleSidebar}
       ></div>
-      <MiniCartDetails isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+      <MiniCart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
       <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </header>
   );

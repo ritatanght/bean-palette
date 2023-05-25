@@ -1,14 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { urlForImage } from "../../../sanity/lib/image";
-import { ProductData } from "../types/types";
+import { urlForImage } from "../../../../sanity/lib/image";
+import { ProductData } from "../../types/types";
 
 interface ProductProps {
   product: ProductData;
 }
 
-const Product: React.FC<ProductProps> = ({ product }) => {
+const ProductCard: React.FC<ProductProps> = ({ product }) => {
   const { name, slug, image, sizePrice, isInStock } = product;
 
   return (
@@ -40,4 +40,4 @@ const Product: React.FC<ProductProps> = ({ product }) => {
   );
 };
 
-export default Product;
+export default ProductCard;

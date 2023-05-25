@@ -1,10 +1,11 @@
 "use client";
-import React, { Dispatch, SetStateAction, use } from "react";
-import { useCartContext } from "../context/cartContext";
+import { useState, Dispatch, SetStateAction } from "react";
+import { useCartContext } from "@/app/context/cartContext";
+import { CartItemDetail } from "@/app/types/types";
 import { IoMdClose } from "react-icons/io";
-import { CartItemDetail } from "../types/types";
+import { BsCartX } from "react-icons/bs";
 import CartItem from "./CartItem";
-import { getStripe } from "./Navbar";
+import { getStripe } from "../Navbar";
 import { toast } from "react-hot-toast";
 
 interface MiniCartProps {
@@ -12,11 +13,10 @@ interface MiniCartProps {
   setIsCartOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const MiniCartDetails: React.FC<MiniCartProps> = ({
-  isCartOpen,
-  setIsCartOpen,
-}) => {
-  const { cartItems, totalQuantity, totalAmount } = useCartContext();
+const MiniCart: React.FC<MiniCartProps> = ({ isCartOpen, setIsCartOpen }) => {
+  const [onClear, SetOnClear] = useState(false);
+  const { cartItems, totalQuantity, totalAmount, setCartItems } =
+    useCartContext();
 
   const handleSubmit = async () => {
     const stripe = await getStripe();
@@ -45,11 +45,16 @@ const MiniCartDetails: React.FC<MiniCartProps> = ({
         toast.error(data.message, { duration: 5000 });
         return;
       }
-
       toast.loading("Redirecting...");
       stripe.redirectToCheckout({ sessionId: data.session.id });
     }
   };
+
+  const clearCart = () => {
+    SetOnClear(false);
+    setCartItems([]);
+  };
+
   return (
     <>
       <div className={`mini-cart-container ${isCartOpen ? "show-cart" : ""}`}>
@@ -78,6 +83,31 @@ const MiniCartDetails: React.FC<MiniCartProps> = ({
         </section>
         {cartItems.length > 0 && (
           <section className="mini-cart__summary">
+            {onClear ? (
+              <div className="confirm-clear-container text-center">
+                <p>Are you sure?</p>
+                <button className="btn confirm-clear-btn" onClick={clearCart}>
+                  Confirm
+                </button>{" "}
+                <button
+                  className="btn confirm-cancel-btn"
+                  onClick={() => SetOnClear(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                className="btn clear clear-cart-btn"
+                onClick={() => SetOnClear(true)}
+              >
+                <span className="icon-btn" aria-hidden={true}>
+                  <BsCartX />
+                </span>
+                Clear Cart
+              </button>
+            )}
+
             <p>
               <span>Subtotal</span>
               <span>${totalAmount.toFixed(2)}</span>
@@ -107,4 +137,4 @@ const MiniCartDetails: React.FC<MiniCartProps> = ({
   );
 };
 
-export default MiniCartDetails;
+export default MiniCart;

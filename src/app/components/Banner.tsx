@@ -50,6 +50,7 @@ const Banner = () => {
       <button
         className="icon-btn"
         key={`banner_${i}`}
+        aria-label={`banner ${i + 0}`}
         onClick={() => setBannerInd(i)}
       >
         {element}
@@ -58,11 +59,11 @@ const Banner = () => {
   }
 
   return (
-    <div className="hero-banner-container text-center">
+    <section className="hero-banner-container text-center">
       {freeBagBanner}
       {freeShippingBanner}
       <div className="banner__selector">{bannerSelectorElement}</div>
-    </div>
+    </section>
   );
 };
 

@@ -20,6 +20,8 @@ export interface ProductData {
   name: string;
   description: PortableTextBlock;
   slug: Slug;
+  origin: string;
+  processMethod: string;
 }
 
 export interface CartItemDetail {

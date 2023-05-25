@@ -53,11 +53,9 @@ export default defineType({
       ],
       validation: (rule) => rule.unique(),
     }),
-
     {
       title: "Description",
       name: "description",
-
       type: "array",
       of: [
         {
@@ -76,6 +74,34 @@ export default defineType({
       name: "isInStock",
       type: "boolean",
       initialValue: true,
+    }),
+    defineField({
+      title: "Origin",
+      name: "origin",
+      type: "string",
+      options: {
+        list: [
+          { title: "Brazil", value: "Brazil" },
+          { title: "Colombia", value: "Colombia" },
+          { title: "Ethiopia", value: "Ethiopia" },
+          { title: "Guatemala", value: "Guatemala" },
+          { title: "Honduras", value: "Honduras" },
+          { title: "Kenya", value: "Kenya" },
+          { title: "Panama", value: "Panama" },
+        ],
+      },
+    }),
+    defineField({
+      title: "Process Method",
+      name: "processMethod",
+      type: "string",
+      options: {
+        list: [
+          { title: "Honey", value: "Honey" },
+          { title: "Natural", value: "Natural" },
+          { title: "Washed", value: "Washed" },
+        ],
+      },
     }),
   ],
 });

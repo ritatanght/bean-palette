@@ -10,6 +10,7 @@
   --clr-dark: #241916;
   --clr-alert: #cc3300;
   --std-transition: all 0.5s ease;
+  color: var(--clr-dark);
 }
 
 h1,
@@ -64,6 +65,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: inherit;
 }
 
 .btn {
@@ -588,11 +590,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     display: block;
     margin-top: 1em;
   }
-  .show-filters,
-  .radio-filters-container,
-  .filter-expand-toggle {
-    display: flex;
-  }
+
   .range-slider {
     width: 95%;
     margin-inline: auto;
@@ -611,6 +609,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
     justify-content: space-between;
     align-items: center;
     display: none;
+  }
+  .show-filters,
+  .radio-filters-container,
+  .filter-expand-toggle {
+    display: flex;
   }
 
   .radio-filters-container h2 {

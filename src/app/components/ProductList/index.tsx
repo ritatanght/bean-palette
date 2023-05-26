@@ -152,6 +152,7 @@ const ProductList: React.FC<{ products: ProductData[] }> = ({ products }) => {
           className="sort-bar"
           name="sort"
           defaultValue=""
+          aria-label="Sort By"
           onChange={(e) => setSort(e.target.value)}
         >
           <option value="" disabled>

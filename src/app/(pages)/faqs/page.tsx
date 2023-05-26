@@ -17,9 +17,7 @@ const FAQs = () => {
           />
         </h3>
         {orderFaqList.map((item, i) => (
-          <>
-            <FAQItem key={`order_q${i}`} item={item} />
-          </>
+          <FAQItem key={`order_q${i + 1}`} item={item} id={`order_a${i + 1}`} />
         ))}
       </section>
       <section key="shipping_q">
@@ -31,7 +29,7 @@ const FAQs = () => {
             className="icon-deco"
           />
         </h3>
-        <FAQItem key="shipping_q1" item={shippingFaqItem} />
+        <FAQItem key="shipping_q1" item={shippingFaqItem} id="shipping_a1" />
       </section>
     </main>
   );

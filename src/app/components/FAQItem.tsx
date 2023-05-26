@@ -7,7 +7,7 @@ interface FAQ {
   answer: React.ReactNode;
 }
 
-const FAQItem: React.FC<{ item: FAQ }> = ({ item }) => {
+const FAQItem: React.FC<{ item: FAQ; id: string }> = ({ item, id }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
@@ -18,13 +18,14 @@ const FAQItem: React.FC<{ item: FAQ }> = ({ item }) => {
         {item.question}
         <button
           className="icon-btn"
-          aria-label="Toggle expand answer"
+          aria-label="Expand/Collapse Answer"
           aria-expanded={expanded}
+          aria-controls={id}
         >
           {expanded ? <MdExpandLess /> : <MdExpandMore />}
         </button>
       </h4>
-      <div className="faqs__answer" aria-expanded={expanded}>
+      <div className={`faqs__answer ${expanded ? "expanded" : ""}`} id={id}>
         {item.answer}
       </div>
     </>

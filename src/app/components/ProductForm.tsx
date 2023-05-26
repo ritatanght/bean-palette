@@ -17,6 +17,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
   const [price, setPrice] = useState(sizePrice[0].price);
   const [grind, setGrind] = useState(isInStock ? "Whole Bean" : "");
   const [quantity, setQuantity] = useState(isInStock ? 1 : 0);
+  const [isShareVisible, setIsShareVisible] = useState(false);
   const { addToCart } = useCartContext() as CartContextType;
   const pathname = usePathname();
   const path =
@@ -36,6 +37,12 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
     );
     if (sizePricePair) {
       setPrice(sizePricePair.price);
+    }
+  };
+
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLLabelElement>) => {
+    if (e.key === "Enter") {
+      e.target.dispatchEvent(new MouseEvent("click"));
     }
   };
 
@@ -69,6 +76,8 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
                 className={`product-size ${
                   size === item.size ? "selected" : ""
                 }${isInStock ? "" : "disabled"}`}
+                onKeyUp={handleEnterPress}
+                tabIndex={0}
               >
                 <input
                   type="radio"
@@ -92,6 +101,8 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
               className={`product-grind ${grind === option ? "selected" : ""}${
                 isInStock ? "" : "disabled"
               }`}
+              onKeyUp={handleEnterPress}
+              tabIndex={0}
             >
               <input
                 type="radio"
@@ -106,48 +117,11 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
           ))}
         </div>
       </section>
-      <div className="product-share__container">
-        <button className="icon-btn share-icon">
-          <BsFillShareFill />
-        </button>
-        <ul aria-label="Social media share icons" className="social-share-list">
-          <li>
-            <a
-              aria-label="Facebook"
-              href={`https://www.facebook.com/sharer.php?u=${path}`}
-              target="_blank"
-              className="icon-btn"
-              style={{ color: "#1877F2" }}
-            >
-              <BsFacebook />
-            </a>
-          </li>
-          <li>
-            <a
-              aria-label="Twitter"
-              href={`https://twitter.com/intent/tweet?url=${path}&text=${encodeURIComponent(
-                "Take a look at this!"
-              )}`}
-              target="_blank"
-              className="icon-btn"
-              style={{ color: "#08A0E9" }}
-            >
-              <BsTwitter />
-            </a>
-          </li>
-          <li>
-            <button
-              aria-label="Copy URL"
-              className="icon-btn copy-link-btn"
-              onClick={() => navigator.clipboard.writeText(path)}
-            >
-              <BsLink45Deg />
-            </button>
-          </li>
-        </ul>
-      </div>
-      <section>
-        <strong>Quantity:</strong>
+
+      <section className="qty-share-wrapper">
+        <label className="qty-label" htmlFor="quantity">
+          Quantity:
+        </label>
         <div className="qty-selector-container">
           <button
             className="minus-qty icon-btn"
@@ -158,6 +132,7 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
             <HiMinusSm />
           </button>
           <input
+            id="quantity"
             type="number"
             min={isInStock ? 1 : 0}
             name="quantity"
@@ -174,6 +149,55 @@ const ProductForm: React.FC<{ product: ProductData }> = ({ product }) => {
           >
             <HiPlusSm />
           </button>
+        </div>
+        <div className="product-share__container">
+          <button
+            className="icon-btn share-icon"
+            aria-label="Toggle social media share options"
+            aria-expanded={isShareVisible}
+            onFocus={() => setIsShareVisible(true)}
+            onMouseLeave={() => setIsShareVisible(false)}
+          >
+            <BsFillShareFill />
+          </button>
+          <ul
+            className={`social-share-list ${isShareVisible ? "visible" : ""}`}
+          >
+            <li>
+              <a
+                aria-label="Share on Facebook"
+                href={`https://www.facebook.com/sharer.php?u=${path}`}
+                target="_blank"
+                className="icon-btn"
+                style={{ color: "#1877F2" }}
+              >
+                <BsFacebook />
+              </a>
+            </li>
+            <li>
+              <a
+                aria-label="Share on Twitter"
+                href={`https://twitter.com/intent/tweet?url=${path}&text=${encodeURIComponent(
+                  "Take a look at this!"
+                )}`}
+                target="_blank"
+                className="icon-btn"
+                style={{ color: "#08A0E9" }}
+              >
+                <BsTwitter />
+              </a>
+            </li>
+            <li>
+              <button
+                aria-label="Copy URL"
+                title="Copy URL"
+                className="icon-btn copy-link-btn"
+                onClick={() => navigator.clipboard.writeText(path)}
+              >
+                <BsLink45Deg />
+              </button>
+            </li>
+          </ul>
         </div>
       </section>
       <button

@@ -75,6 +75,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           <input
             type="range"
             className="min-price"
+            aria-label="Minimum Price Range Slider Thumb"
             name="min"
             value={filter.min}
             style={passedInlineStyle}
@@ -86,6 +87,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           <input
             type="range"
             className="max-price"
+            aria-label="Maximum Price Range Slider Thumb"
             value={filter.max}
             name="max"
             style={passedInlineStyle}

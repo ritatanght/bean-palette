@@ -45,6 +45,7 @@ const ProductImage: React.FC<Props> = ({ name, images }) => {
         <div className="enlarge-image">
           <button
             className="icon-btn enlarge-image-close"
+            aria-label="Close Enlarged Image"
             onClick={() => setLgImage(false)}
           >
             <IoMdClose />
@@ -86,7 +87,7 @@ const ProductImage: React.FC<Props> = ({ name, images }) => {
       </div>
       <div className="product-thumbnails">
         {images.map((img, ind) => (
-          <div
+          <button
             className={`thumbnail ${index === ind ? "current" : ""}`}
             key={img._key as React.Key}
             onClick={() => setIndex(ind)}
@@ -97,7 +98,7 @@ const ProductImage: React.FC<Props> = ({ name, images }) => {
               fill={true}
               sizes="100px"
             />
-          </div>
+          </button>
         ))}
       </div>
     </div>

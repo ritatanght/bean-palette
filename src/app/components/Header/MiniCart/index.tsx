@@ -57,9 +57,16 @@ const MiniCart: React.FC<MiniCartProps> = ({ isCartOpen, setIsCartOpen }) => {
 
   return (
     <>
-      <div className={`mini-cart-container ${isCartOpen ? "show-cart" : ""}`}>
+      <div
+        id="cart"
+        className={`mini-cart-container ${isCartOpen ? "show-cart" : ""}`}
+      >
         <header className="mini-cart__header">
-          <button className="icon-btn" onClick={() => setIsCartOpen(false)}>
+          <button
+            className="icon-btn"
+            aria-label="Close Cart"
+            onClick={() => setIsCartOpen(false)}
+          >
             <IoMdClose />
           </button>{" "}
           <h2>My Cart</h2>

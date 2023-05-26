@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
       >
         <IoMdClose />
       </button>
-      <ul className="nav__list" role="menubar">
+      <ul className="nav__list">
         <li>
           <Link
             href="/"

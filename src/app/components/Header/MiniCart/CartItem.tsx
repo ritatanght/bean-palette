@@ -76,6 +76,7 @@ const CartItem: React.FC<{ item: CartItemDetail }> = ({ item }) => {
           min="1"
           name="quantity"
           value={quantity}
+          aria-label="Quantity"
           className="quantity-num text-center"
           onChange={(e) => handleQuantityChange(e.target.value, "input")}
         />

@@ -33,20 +33,18 @@ h3 {
 }
 
 .faqs__answer {
-  background: var(--clr-brown-100);
   overflow: hidden;
+  background: var(--clr-brown-100);
   line-height: 1.6;
+  padding-inline: 0.5em;
+  height: 0;
 }
 
 ol {
   padding: 0.5em 0 0.5em 2em;
 }
-.faqs__answer[aria-expanded="false"] {
-  height: 0;
-  padding-inline: 0.5em;
-}
 
-.faqs__answer[aria-expanded="true"] {
+.faqs__answer.expanded {
   height: auto;
   padding: 0.5em;
 }

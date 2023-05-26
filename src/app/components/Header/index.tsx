@@ -43,8 +43,10 @@ const Header = () => {
           type="button"
           className="cart-icon icon-btn"
           aria-label="View Cart"
+          aria-expanded={isCartOpen}
           onClick={() => setIsCartOpen(true)}
           data-count={totalQuantity}
+          aria-controls="cart"
         >
           <GrCart />
         </button>

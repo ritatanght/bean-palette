@@ -4,8 +4,16 @@ Bean Palette is a sample full-stack web application built with Next.js, Sanity, 
 
 - [Live Demo Here](https://bean-palette.vercel.app/)
 
-<img src="./public/bean-palette-screenshot.png" width="600">
-<img src="./public/bean-palette-screenshot-2.png" width="600">
+## Screenshots
+Desktop Design<br/>
+<img src="./public/bean-palette_home.png" width="600">
+<img src="./public/bean-palette_product_cart.png" width="600">
+<img src="./public/bean-palette_faqs.png" width="600">
+
+Mobile Design<br/>
+<img src="./public/bean-palette-mobile_home.png" width="290">
+<img src="./public/bean-palette-mobile_cart.png" width="290">
+<img src="./public/bean-palette-mobile_product.png" width="300">
 
 ## Features
 
@@ -21,9 +29,7 @@ Bean Palette is a sample full-stack web application built with Next.js, Sanity, 
 
 ## Built with
 
-- HTML
 - CSS
-- React
 - Typescript
 - Next.js
 - Sanity.io
